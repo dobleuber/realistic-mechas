@@ -1,0 +1,583 @@
+{
+ "limits": {
+  "tubo|optimista": {
+   "masa": 79.34885242101346,
+   "actuador": null,
+   "suelo": {
+    "arcilla_blanda": [
+     3.0,
+     75.26592473745768
+    ],
+    "arcilla_firme": [
+     3.0,
+     77.28042930990766
+    ],
+    "arcilla_dura": [
+     3.0,
+     77.28042930990766
+    ],
+    "arena_suelta": [
+     5.08796057985877,
+     77.28042930990766
+    ],
+    "arena_densa": [
+     3.0,
+     77.28042930990766
+    ],
+    "grava_densa": [
+     3.0,
+     77.28042930990766
+    ],
+    "pavimento": [
+     3.0,
+     77.28042930990766
+    ],
+    "roca_blanda": [
+     3.0,
+     77.28042930990766
+    ],
+    "granito": [
+     3.0,
+     77.28042930990766
+    ]
+   }
+  },
+  "tubo+giroide|optimista": {
+   "masa": 79.34885242101346,
+   "actuador": null,
+   "suelo": {
+    "arcilla_blanda": [
+     3.0,
+     33.18895306905098
+    ],
+    "arcilla_firme": [
+     3.0,
+     56.2880283007047
+    ],
+    "arcilla_dura": [
+     3.0,
+     67.71952531552805
+    ],
+    "arena_suelta": [
+     5.9617050074415365,
+     60.92975174299769
+    ],
+    "arena_densa": [
+     3.080295482164484,
+     77.28042930990766
+    ],
+    "grava_densa": [
+     3.0,
+     77.28042930990766
+    ],
+    "pavimento": [
+     3.0,
+     77.28042930990766
+    ],
+    "roca_blanda": [
+     3.0,
+     77.28042930990766
+    ],
+    "granito": [
+     3.0,
+     77.28042930990766
+    ]
+   }
+  },
+  "giroide|optimista": {
+   "masa": 43.22199358684769,
+   "actuador": 42.09530595728057,
+   "suelo": {
+    "arcilla_blanda": [
+     3.0,
+     21.182852508503647
+    ],
+    "arcilla_firme": [
+     3.0,
+     28.32479713292324
+    ],
+    "arcilla_dura": [
+     3.0,
+     34.07726073212228
+    ],
+    "arena_suelta": [
+     5.363965626987452,
+     23.54338686222479
+    ],
+    "arena_densa": [
+     3.080295482164484,
+     37.87469757905283
+    ],
+    "grava_densa": [
+     3.0,
+     42.09530595728057
+    ],
+    "pavimento": [
+     3.0,
+     42.09530595728057
+    ],
+    "roca_blanda": [
+     3.0,
+     42.09530595728057
+    ],
+    "granito": [
+     3.0,
+     42.09530595728057
+    ]
+   }
+  },
+  "tubo|base": {
+   "masa": 29.08291488058965,
+   "actuador": null,
+   "suelo": {
+    "arcilla_blanda": [
+     4.118838320133882,
+     28.32479713292324
+    ],
+    "arcilla_firme": [
+     3.0,
+     28.32479713292324
+    ],
+    "arcilla_dura": [
+     3.0,
+     28.32479713292324
+    ],
+    "arena_suelta": [
+     7.172463583523551,
+     28.32479713292324
+    ],
+    "arena_densa": [
+     4.011470663106282,
+     28.32479713292324
+    ],
+    "grava_densa": [
+     3.515183488866783,
+     28.32479713292324
+    ],
+    "pavimento": [
+     3.0,
+     28.32479713292324
+    ],
+    "roca_blanda": [
+     3.0,
+     28.32479713292324
+    ],
+    "granito": [
+     3.0,
+     28.32479713292324
+    ]
+   }
+  },
+  "tubo+giroide|base": {
+   "masa": 27.58644159003191,
+   "actuador": null,
+   "suelo": {
+    "arcilla_blanda": [
+     4.458493286967047,
+     15.428757476318056
+    ],
+    "arcilla_firme": [
+     3.0,
+     23.54338686222479
+    ],
+    "arcilla_dura": [
+     3.0,
+     26.86733310141461
+    ],
+    "arena_suelta": [
+     11.847308865251167,
+     14.25337068719481
+    ],
+    "arena_densa": [
+     4.229079689758117,
+     26.86733310141461
+    ],
+    "grava_densa": [
+     3.6092679399118466,
+     26.86733310141461
+    ],
+    "pavimento": [
+     3.0,
+     26.86733310141461
+    ],
+    "roca_blanda": [
+     3.0,
+     26.86733310141461
+    ],
+    "granito": [
+     3.0,
+     26.86733310141461
+    ]
+   }
+  },
+  "giroide|base": {
+   "masa": 17.607049014782504,
+   "actuador": null,
+   "suelo": {
+    "arcilla_blanda": [
+     5.08796057985877,
+     8.404175187766755
+    ],
+    "arcilla_firme": [
+     3.0,
+     12.82428270761319
+    ],
+    "arcilla_dura": [
+     3.0,
+     15.026568943453892
+    ],
+    "arena_suelta": null,
+    "arena_densa": [
+     4.458493286967047,
+     13.167526695420344
+    ],
+    "grava_densa": [
+     3.8050587980012107,
+     14.634864444460622
+    ],
+    "pavimento": [
+     3.0,
+     17.148077952323835
+    ],
+    "roca_blanda": [
+     3.0,
+     17.148077952323835
+    ],
+    "granito": [
+     3.0,
+     17.148077952323835
+    ]
+   }
+  },
+  "tubo|pesimista": {
+   "masa": 5.654943035801101,
+   "actuador": null,
+   "suelo": {
+    "arcilla_blanda": null,
+    "arcilla_firme": null,
+    "arcilla_dura": [
+     3.080295482164484,
+     5.224140662523318
+    ],
+    "arena_suelta": null,
+    "arena_densa": null,
+    "grava_densa": null,
+    "pavimento": [
+     3.0,
+     5.507533029098344
+    ],
+    "roca_blanda": [
+     3.0,
+     5.507533029098344
+    ],
+    "granito": [
+     3.0,
+     5.507533029098344
+    ]
+   }
+  },
+  "tubo+giroide|pesimista": {
+   "masa": 5.654943035801101,
+   "actuador": null,
+   "suelo": {
+    "arcilla_blanda": null,
+    "arcilla_firme": null,
+    "arcilla_dura": [
+     3.1627400858143107,
+     4.826157485415473
+    ],
+    "arena_suelta": null,
+    "arena_densa": null,
+    "grava_densa": null,
+    "pavimento": [
+     3.0,
+     5.507533029098344
+    ],
+    "roca_blanda": [
+     3.0,
+     5.507533029098344
+    ],
+    "granito": [
+     3.0,
+     5.507533029098344
+    ]
+   }
+  },
+  "giroide|pesimista": {
+   "masa": null,
+   "actuador": null,
+   "suelo": {
+    "arcilla_blanda": null,
+    "arcilla_firme": null,
+    "arcilla_dura": null,
+    "arena_suelta": null,
+    "arena_densa": null,
+    "grava_densa": null,
+    "pavimento": null,
+    "roca_blanda": null,
+    "granito": null
+   }
+  }
+ },
+ "materials": {
+  "Ti64": 29.08291488058965,
+  "Ti64_asbuilt": 21.749814960433465,
+  "acero": 24.82053779499745,
+  "Al7075": 22.929670544802242,
+  "CFRP": 33.18895306905098
+ },
+ "densidad_humana": {
+  "5": {
+   "m_t": 1.6325,
+   "q_kPa": 99.61374401913876,
+   "suelos": {
+    "arcilla_blanda": {
+     "q_ult_kPa": 137.54605263157893,
+     "hundimiento_m": 0.0
+    },
+    "arcilla_firme": {
+     "q_ult_kPa": 412.6381578947369,
+     "hundimiento_m": 0.0
+    },
+    "arcilla_dura": {
+     "q_ult_kPa": 825.2763157894738,
+     "hundimiento_m": 0.0
+    },
+    "arena_suelta": {
+     "q_ult_kPa": 42.15204653642042,
+     "hundimiento_m": 0.14067103806538875
+    },
+    "arena_densa": {
+     "q_ult_kPa": 174.33546764940866,
+     "hundimiento_m": 0.0
+    },
+    "grava_densa": {
+     "q_ult_kPa": 257.33072795650065,
+     "hundimiento_m": 0.0
+    },
+    "pavimento": {
+     "q_ult_kPa": 5250.0,
+     "hundimiento_m": 0.0
+    },
+    "roca_blanda": {
+     "q_ult_kPa": 2298.0,
+     "hundimiento_m": 0.0
+    },
+    "granito": {
+     "q_ult_kPa": 17238.0,
+     "hundimiento_m": 0.0
+    }
+   }
+  },
+  "10": {
+   "m_t": 13.06,
+   "q_kPa": 199.22748803827753,
+   "suelos": {
+    "arcilla_blanda": {
+     "q_ult_kPa": 137.54605263157893,
+     "hundimiento_m": 0.699986909535406
+    },
+    "arcilla_firme": {
+     "q_ult_kPa": 412.6381578947369,
+     "hundimiento_m": 0.0
+    },
+    "arcilla_dura": {
+     "q_ult_kPa": 825.2763157894738,
+     "hundimiento_m": 0.0
+    },
+    "arena_suelta": {
+     "q_ult_kPa": 84.30409307284084,
+     "hundimiento_m": 0.2813420761307775
+    },
+    "arena_densa": {
+     "q_ult_kPa": 348.6709352988173,
+     "hundimiento_m": 0.0
+    },
+    "grava_densa": {
+     "q_ult_kPa": 514.6614559130013,
+     "hundimiento_m": 0.0
+    },
+    "pavimento": {
+     "q_ult_kPa": 5250.0,
+     "hundimiento_m": 0.0
+    },
+    "roca_blanda": {
+     "q_ult_kPa": 2298.0,
+     "hundimiento_m": 0.0
+    },
+    "granito": {
+     "q_ult_kPa": 17238.0,
+     "hundimiento_m": 0.0
+    }
+   }
+  },
+  "15": {
+   "m_t": 44.0775,
+   "q_kPa": 298.84123205741633,
+   "suelos": {
+    "arcilla_blanda": {
+     "q_ult_kPa": 137.54605263157893,
+     "hundimiento_m": 4.939825873278193
+    },
+    "arcilla_firme": {
+     "q_ult_kPa": 412.6381578947369,
+     "hundimiento_m": 0.0
+    },
+    "arcilla_dura": {
+     "q_ult_kPa": 825.2763157894738,
+     "hundimiento_m": 0.0
+    },
+    "arena_suelta": {
+     "q_ult_kPa": 126.45613960926126,
+     "hundimiento_m": 0.42201311419616644
+    },
+    "arena_densa": {
+     "q_ult_kPa": 523.006402948226,
+     "hundimiento_m": 0.0
+    },
+    "grava_densa": {
+     "q_ult_kPa": 771.9921838695018,
+     "hundimiento_m": 0.0
+    },
+    "pavimento": {
+     "q_ult_kPa": 5250.0,
+     "hundimiento_m": 0.0
+    },
+    "roca_blanda": {
+     "q_ult_kPa": 2298.0,
+     "hundimiento_m": 0.0
+    },
+    "granito": {
+     "q_ult_kPa": 17238.0,
+     "hundimiento_m": 0.0
+    }
+   }
+  },
+  "20": {
+   "m_t": 104.48,
+   "q_kPa": 398.45497607655506,
+   "suelos": {
+    "arcilla_blanda": {
+     "q_ult_kPa": 137.54605263157893,
+     "hundimiento_m": 10.59859036814169
+    },
+    "arcilla_firme": {
+     "q_ult_kPa": 412.6381578947369,
+     "hundimiento_m": 0.0
+    },
+    "arcilla_dura": {
+     "q_ult_kPa": 825.2763157894738,
+     "hundimiento_m": 0.0
+    },
+    "arena_suelta": {
+     "q_ult_kPa": 168.60818614568169,
+     "hundimiento_m": 0.562684152261555
+    },
+    "arena_densa": {
+     "q_ult_kPa": 697.3418705976346,
+     "hundimiento_m": 0.0
+    },
+    "grava_densa": {
+     "q_ult_kPa": 1029.3229118260026,
+     "hundimiento_m": 0.0
+    },
+    "pavimento": {
+     "q_ult_kPa": 5250.0,
+     "hundimiento_m": 0.0
+    },
+    "roca_blanda": {
+     "q_ult_kPa": 2298.0,
+     "hundimiento_m": 0.0
+    },
+    "granito": {
+     "q_ult_kPa": 17238.0,
+     "hundimiento_m": 0.0
+    }
+   }
+  },
+  "30": {
+   "m_t": 352.62,
+   "q_kPa": 597.6824641148327,
+   "suelos": {
+    "arcilla_blanda": {
+     "q_ult_kPa": 137.54605263157893,
+     "hundimiento_m": 22.223009947495424
+    },
+    "arcilla_firme": {
+     "q_ult_kPa": 412.6381578947369,
+     "hundimiento_m": 1.5611140936888215
+    },
+    "arcilla_dura": {
+     "q_ult_kPa": 825.2763157894738,
+     "hundimiento_m": 0.0
+    },
+    "arena_suelta": {
+     "q_ult_kPa": 252.9122792185225,
+     "hundimiento_m": 0.8440262283923329
+    },
+    "arena_densa": {
+     "q_ult_kPa": 1046.012805896452,
+     "hundimiento_m": 0.0
+    },
+    "grava_densa": {
+     "q_ult_kPa": 1543.9843677390036,
+     "hundimiento_m": 0.0
+    },
+    "pavimento": {
+     "q_ult_kPa": 5250.0,
+     "hundimiento_m": 0.0
+    },
+    "roca_blanda": {
+     "q_ult_kPa": 2298.0,
+     "hundimiento_m": 0.0
+    },
+    "granito": {
+     "q_ult_kPa": 17238.0,
+     "hundimiento_m": 0.0
+    }
+   }
+  },
+  "50": {
+   "m_t": 1632.5,
+   "q_kPa": 996.1374401913877,
+   "suelos": {
+    "arcilla_blanda": {
+     "q_ult_kPa": 137.54605263157893,
+     "hundimiento_m": 45.61655513244721
+    },
+    "arcilla_firme": {
+     "q_ult_kPa": 412.6381578947369,
+     "hundimiento_m": 18.820489013401435
+    },
+    "arcilla_dura": {
+     "q_ult_kPa": 825.2763157894738,
+     "hundimiento_m": 1.2244581486015247
+    },
+    "arena_suelta": {
+     "q_ult_kPa": 421.5204653642042,
+     "hundimiento_m": 1.4067103806538876
+    },
+    "arena_densa": {
+     "q_ult_kPa": 1743.3546764940866,
+     "hundimiento_m": 0.0
+    },
+    "grava_densa": {
+     "q_ult_kPa": 2573.307279565006,
+     "hundimiento_m": 0.0
+    },
+    "pavimento": {
+     "q_ult_kPa": 5250.0,
+     "hundimiento_m": 0.0
+    },
+    "roca_blanda": {
+     "q_ult_kPa": 2298.0,
+     "hundimiento_m": 0.0
+    },
+    "granito": {
+     "q_ult_kPa": 17238.0,
+     "hundimiento_m": 0.0
+    }
+   }
+  }
+ }
+}

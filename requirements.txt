@@ -1,0 +1,8 @@
+numpy>=2.0
+scipy>=1.13
+matplotlib>=3.8
+mujoco>=3.2
+pyamg>=5.0
+pillow>=10.1
+imageio>=2.34
+imageio-ffmpeg>=0.5
