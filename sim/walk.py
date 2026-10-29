@@ -186,9 +186,16 @@ def overlay(img, label, t_human, x, sink):
     from PIL import Image, ImageDraw, ImageFont
     im = Image.fromarray(img)
     d = ImageDraw.Draw(im)
-    try:
-        font = ImageFont.load_default(size=22)
-    except TypeError:
+    font = None
+    for path in ("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+                 "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+                 "DejaVuSans.ttf", "Arial.ttf"):
+        try:
+            font = ImageFont.truetype(path, 20)
+            break
+        except OSError:
+            continue
+    if font is None:
         font = ImageFont.load_default()
     lines = [label] if label else []
     lines.append(f"avance: {x:5.1f} m")

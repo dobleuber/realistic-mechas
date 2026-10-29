@@ -41,8 +41,10 @@ altura máxima (≈18 m frente a ≈29 m de un tubo de titanio de pared delgada)
    - Los 574 kPa «del granito» del documento son un valor admisible de un código
      residencial, no la resistencia de la roca (que es de >100 MPa).
 5. **Similitud dinámica verificada.** Con escala de Froude (tiempo ∝ √H), los
-   pares normalizados son idénticos de 1.75 m a 28 m. MuJoCo y Gazebo
-   coinciden en la distancia recorrida en todos los casos (diferencia < 0.1 %).
+   pares normalizados son idénticos de 1.75 m a 28 m.
+   - En los casos en que el mecha camina, MuJoCo y Gazebo coinciden en la
+     distancia recorrida con una diferencia menor del 0.1 %.
+   - Con actuadores al 70 % del par necesario, los dos se caen.
 
 La verificación afirmación por afirmación, con enlaces a las fuentes, está en
 [`docs/verificacion_fuentes.md`](docs/verificacion_fuentes.md).
@@ -152,7 +154,7 @@ python3.12 gazebo/run_gazebo.py gazebo/out_H20 --no-server
 |---|---|---|
 | Humano 1.75 m | camina 1.86 m | camina 1.86 m |
 | 20 m, diseño | camina 21.27 m | camina 21.28 m |
-| 28 m, diseño | camina 29.78 m | camina 29.80 m |
+| 28 m, diseño | camina 29.78 m | camina 29.79 m |
 | 20 m, par al 70 % | cae | cae |
 
 ## Vídeos
@@ -164,7 +166,7 @@ python3.12 gazebo/run_gazebo.py gazebo/out_H20 --no-server
 | `results/videos/e1_marcha_H28.mp4` | Mecha de 28 m, al borde de la espiral de masa (≈47 t) |
 | `results/videos/e2_par_60pct_H20.mp4` | 20 m con actuadores al 60 % del par necesario: cae |
 | `results/videos/e3_arcilla_blanda_H20.mp4` | 20 m con densidad humana (104 t) en arcilla blanda: se hunde y cae |
-| `results/videos/e3_arcilla_blanda_H50.mp4` | 50 m (1600 t) en arcilla blanda: se hunde ~13 m |
+| `results/videos/e3_arcilla_blanda_H50.mp4` | 50 m (1600 t) en arcilla blanda: se hunde ~10 m y cae |
 | `results/videos/e3_arena_densa_H50.mp4` | 50 m (1600 t) en arena densa: camina |
 
 Los vídeos se reproducen con el tiempo de una persona: un segundo de vídeo son
