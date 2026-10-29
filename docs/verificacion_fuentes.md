@@ -1,8 +1,10 @@
 # Verificación de fuentes del documento «Mechas, Ley Cuadrado-Cúbica y Giroides»
 
-Revisión hecha el 29 de octubre de 2026. Cada afirmación del documento original
-(`docs/documento_original.txt`) se contrastó con fuentes primarias siempre que
-fue posible: artículos, normas y fichas técnicas. Las notas de investigación
+Revisión hecha el 29 de octubre de 2026. Cada afirmación del documento, en su
+versión anterior a la corrección, se contrastó con fuentes primarias siempre que
+fue posible: artículos, normas y fichas técnicas. El documento ya está corregido
+(copia en [`documento.md`](documento.md)); el texto anterior solo queda en el
+historial de versiones del Google Doc. Las notas de investigación
 completas, con citas textuales, están en `docs/investigacion/` (en inglés).
 
 **Veredictos:**

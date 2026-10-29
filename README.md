@@ -47,7 +47,9 @@ altura máxima (≈18 m frente a ≈29 m de un tubo de titanio de pared delgada)
    - Con actuadores al 70 % del par necesario, los dos se caen.
 
 La verificación afirmación por afirmación, con enlaces a las fuentes, está en
-[`docs/verificacion_fuentes.md`](docs/verificacion_fuentes.md).
+[`docs/verificacion_fuentes.md`](docs/verificacion_fuentes.md). El documento
+corregido, con estas conclusiones, figuras y tablas, está copiado en
+[`docs/documento.md`](docs/documento.md).
 
 ## Altura máxima por escenario (espiral de masa)
 
@@ -109,8 +111,9 @@ sim/                Simulación física en MuJoCo
   make_videos.py      vídeos de los casos representativos
 gazebo/             El mismo mecha exportado a Gazebo Harmonic (SDF) y verificación cruzada
 results/            JSON, figuras, vídeos y salidas de Gazebo
-docs/               Verificación de fuentes, notas de investigación, texto original,
-                    versión revisada en Markdown y el script que la cargó en Google Docs
+docs/               Verificación de fuentes y notas de investigación
+  documento.md        copia en Markdown del documento corregido
+  gdoc/               contenido del documento y scripts que lo escribieron en Google Docs
 ```
 
 ## Cómo reproducirlo
