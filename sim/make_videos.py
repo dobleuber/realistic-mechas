@@ -22,7 +22,7 @@ cases.append(("e2_par_60pct_H20.mp4", dict(H=20.0, M=M20, torque_limit=torque_li
 for H, soil in ((20.0, "arcilla_blanda"), (50.0, "arcilla_blanda"), (50.0, "arena_densa")):
     M = 13.06 * H ** 3
     cases.append((f"e3_{soil}_H{H:g}.mp4", dict(H=H, M=M, torque_limit=torque_limits(M, H, 1.5), soil=SOILS[soil]),
-                  f"Densidad humana: H = {H:g} m, M = {M / 1e3:,.0f} t, suelo: {SOILS[soil]['label']}"))
+                  f"Densidad humana: H = {H:g} m, M = {M / 1e3:.0f} t, suelo: {SOILS[soil]['label']}"))
 only = sys.argv[1:]
 for fn, kw, label in cases:
     if only and not any(o in fn for o in only):

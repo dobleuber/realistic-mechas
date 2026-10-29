@@ -109,7 +109,8 @@ sim/                Simulación física en MuJoCo
   make_videos.py      vídeos de los casos representativos
 gazebo/             El mismo mecha exportado a Gazebo Harmonic (SDF) y verificación cruzada
 results/            JSON, figuras, vídeos y salidas de Gazebo
-docs/               Verificación de fuentes, notas de investigación, texto original
+docs/               Verificación de fuentes, notas de investigación, texto original,
+                    versión revisada en Markdown y el script que la cargó en Google Docs
 ```
 
 ## Cómo reproducirlo
