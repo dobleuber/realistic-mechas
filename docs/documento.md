@@ -199,7 +199,7 @@ Un mecha gigante se hundiría en suelos blandos, pero no rompería la roca ni el
 Para comprobar los argumentos anteriores se construyeron tres herramientas, cuyo código, datos y vídeos están en [github.com/dobleuber/realistic-mechas](https://github.com/dobleuber/realistic-mechas):
 
 - **Elementos finitos de celdas giroides.** Homogenización periódica por vóxeles de giroides lámina y red entre el 10 y el 50 % de densidad, para obtener su rigidez, su anisotropía y su concentración de tensiones, con la malla convergida al 1 %.
-- **Modelo de dimensionado del mecha.** Para cada altura diseña las piernas (tubos con pandeo local según NASA SP-8007, o secciones rellenas de giroide según Gibson-Ashby), los cilindros hidráulicos, el grupo de potencia y el combustible, y resuelve la masa de forma autoconsistente. Si la masa no converge, esa altura no se puede construir. Usa tres escenarios de parámetros (sección 10).
+- **Modelo de dimensionado del mecha.** Para cada altura diseña las piernas (tubos con pandeo local según NASA SP-8007, o secciones rellenas de giroide según Gibson-Ashby), los cilindros hidráulicos, el grupo de potencia y el combustible, y resuelve la masa de forma autoconsistente. Si la masa no converge, esa altura no se puede construir. Usa tres escenarios de parámetros (sección 11).
 - **Simulación física de la marcha** en MuJoCo, con verificación cruzada en Gazebo Harmonic. Un bípedo con las proporciones y masas del cuerpo humano (tablas de Winter) camina con control predictivo del punto de momento cero (Kajita et al. 2003), con el par de cada articulación limitado al de su actuador y, en algunos casos, sobre un suelo que se hunde según su capacidad portante.
 
 ### Similitud Dinámica
@@ -229,15 +229,53 @@ Con actuadores por debajo del 100 % del par pico necesario el mecha cae, y con e
 *Figura 5: Pares normalizados frente a la altura (izquierda), distancia recorrida según el par disponible (centro) y hundimiento sobre distintos suelos (derecha).*
 
 
-## 10. Conclusión General: El Límite Práctico del Escalado
+## 10. Un Mecha Cuadrúpedo con Patas de Elefante
 
-Del análisis y las simulaciones se desprenden cuatro conclusiones:
+Los animales terrestres más grandes de la historia han sido cuadrúpedos. Los mayores saurópodos rondaban las 50–90 t, frente a unas 6–8 t de los mayores bípedos obligados, como el T. rex (Benson et al. 2014). Entre los animales vivos, el mayor es el elefante africano: los machos pesan 6 t de media y los récords superan las 9.5 t (Larramendi 2016). Esta sección comprueba si un mecha con la forma de un elefante puede ser más grande que el bípedo de las secciones anteriores.
+
+
+### Proporciones, Postura y Marcha
+
+El mecha copia las proporciones medidas en elefantes, normalizadas con la altura de la cadera L. El tronco mide lo mismo que la pata, unos 0.95 L entre hombro y cadera, y los pies van separados unos 0.27 L (estimado a partir de Belyaev et al. 2025). El 60 % del peso cae sobre las patas delanteras (Ren et al. 2010) y los pies son almohadillas redondas de unos 0.04 L² (derivado de Panagiotopoulou et al. 2016). A mitad del apoyo, el codo y la rodilla solo se flexionan 23° y 28° (Ren et al. 2008), y el animal camina en secuencia lateral, con tres pies en el suelo la mayor parte del ciclo (Usherwood y Self Davies 2017).
+
+Cada pata del mecha es una pierna del bípedo, y las cuatro suman la misma masa que las dos piernas. La marcha mantiene siempre al menos tres pies en el suelo (factor de apoyo 0.79, por encima del 0.75 que exige la estabilidad estática; McGhee y Frank 1968), así que el mecha avanza al 45 % de la velocidad del bípedo de la sección 9. Con cuatro patas, el reparto del peso entre los pies no queda determinado: los pares se calcularon por dinámica inversa con el reparto que minimiza el esfuerzo de las articulaciones, como haría un control de fuerza, y la simulación en MuJoCo comprobó que el mecha camina sin caerse. El bípedo se recalculó con el mismo método, a su velocidad y a la del elefante.
+
+
+### Tamaño Máximo del Mecha Tipo Elefante
+
+La Tabla 5 compara el mecha tipo elefante con el bípedo. Todas las cifras suponen un control ideal y por eso son mayores que las de la Tabla 6, que salen de los picos medidos con servos; lo que vale es la comparación entre filas.
+
+
+| Diseño | Velocidad | Actuadores (Σ par × recorrido) | Tamaño máximo | Masa al 80 % del límite |
+|---|---|---|---|---|
+| Bípedo, marcha de la sección 9 | 100 % | 0.84 | 42 m de alto (piernas de 22 m) | 42 t |
+| Bípedo a la velocidad del elefante | 43 % | 0.64 | 58 m de alto (piernas de 31 m) | 100 t |
+| Cuadrúpedo tipo elefante | 45 % | 0.71 | Patas de 34 m, lomo a 53 m y 41 m de largo | 445 t |
+
+*Tabla 5: Mecha tipo elefante frente al bípedo, calculados igual (dinámica inversa con control ideal, escenario base). La velocidad es relativa a la marcha de la sección 9; los actuadores, la suma normalizada de par × recorrido de todas las articulaciones.*
+
+El mecha tipo elefante no es más alto que un bípedo que camine a su misma velocidad: su lomo llega a 53 m y la cabeza del bípedo, a 58 m. Pero cerca de su límite pesa unas 4.5 veces más (445 t frente a 100 t), apoya con una presión parecida (69 kPa por pie, frente a 56 kPa) y nunca necesita mantener el equilibrio: puede detenerse en cualquier momento sin caerse. Con patas de 27 m camina a unos 0.7 m/s.
+
+El rasgo que más ayuda es la postura. Con las patas casi rectas, la fuerza del suelo pasa cerca de las rodillas y la suma de actuadores baja un 16 % frente a un cuadrúpedo con las patas flexionadas del bípedo. La vía estrecha y los pies grandes ahorran un 5 % cada uno; el largo y el canto del cuerpo no influyen. El codo hacia atrás del elefante real, en cambio, aumenta esa suma un 22 % en el mecha, así que el diseño dobla las patas delanteras hacia delante.
+
+
+![elefante_mecha.png](../results/figures/elefante_mecha.png)
+
+*Figura 6: Mecha tipo elefante en MuJoCo al 80 % de su tamaño máximo: patas de 27 m, lomo a 42 m y 445 t. La figura roja es una persona de 1.75 m y la caja amarilla, un autobús de 12 m. [Vídeo de la marcha](https://github.com/dobleuber/realistic-mechas/blob/main/results/videos/animal_elefante.mp4).*
+
+**Limitaciones.** Los elefantes caminan con un factor de apoyo de 0.73–0.74 y a números de Froude de 0.09–0.10 (Ren y Hutchinson 2008), mucho más deprisa que este mecha (0.0017); bajar de 0.75 exigiría equilibrio dinámico, que el planificador no modela. Además, las patas del mecha tienen dos segmentos iguales, mientras que en el elefante el fémur mide 1.75 veces la tibia, y el control es ideal.
+
+
+## 11. Conclusión General: El Límite Práctico del Escalado
+
+Del análisis y las simulaciones se desprenden cinco conclusiones:
 
 - **El giroide no compensa la ley cuadrado-cúbica.** Su resistencia por kilo es siempre menor que la del material macizo, así que unas piernas rellenas de giroide alcanzan menos altura que unos tubos de pared delgada. Su utilidad está en núcleos contra el pandeo, absorción de impactos e intercambio de calor.
 - **La arquitectura importa más que el material.** Los tubos de pared delgada de Ti-6Al-4V con HIP o de CFRP laminado dan las mayores alturas; el titanio impreso sin HIP y el CFRP impreso quedan penalizados por la fatiga y la anisotropía.
 - **Los actuadores y la energía fijan el límite.** Su masa crece con H⁴ y H<sup>3.5</sup>, mientras el mecha crece con H³. Los EHA mejoran la eficiencia, pero no cambian esa tendencia.
 - **El suelo depende del terreno.** En arcilla blanda, un mecha de 20 m con densidad humana se hunde; en arena densa, arcilla dura, roca o pavimento, incluso uno de 50 m camina.
-La Tabla 5 resume la altura máxima por concepto de pierna y escenario.
+- **Cuatro patas de elefante dan un mecha más masivo y estable, no más alto.** Con el mismo método, el mecha tipo elefante llega casi a la altura de un bípedo que camine a su velocidad (53 m de lomo frente a 58 m de cabeza), con unas 4.5 veces su masa cerca del límite y sin riesgo de caer.
+La Tabla 6 resume la altura máxima por concepto de pierna y escenario.
 
 
 | Piernas | Optimista | Base | Pesimista |
@@ -246,7 +284,7 @@ La Tabla 5 resume la altura máxima por concepto de pierna y escenario.
 | Tubo con núcleo de giroide | 79 m | 28 m | 6 m |
 | Sección rellena de giroide | 43 m | 18 m | Menos de 3 m |
 
-*Tabla 5: Altura a la que la masa del mecha deja de converger, por concepto de pierna y escenario.*
+*Tabla 6: Altura a la que la masa del mecha deja de converger, por concepto de pierna y escenario.*
 
 Escenario optimista: actuadores de 0.24 kg/kJ, grupo de potencia de 300 W/kg, eficiencia del 60 % y márgenes de seguridad mínimos. Base: 0.5 kg/kJ, 150 W/kg, 45 % y factor de carga de diseño de 1.5. Pesimista: actuadores de la robótica actual (2 kg/kJ), 100 W/kg y 30 %.
 
@@ -255,7 +293,7 @@ En conclusión, ¿qué tan grande podría ser un mecha? Con tubos de pared delga
 
 ![altura_maxima.png](../results/figures/altura_maxima.png)
 
-*Figura 6: Altura máxima de un mecha bípedo que camina, por concepto de pierna y escenario.*
+*Figura 7: Altura máxima de un mecha bípedo que camina, por concepto de pierna y escenario.*
 
 
 ### Limitaciones del Análisis
@@ -269,6 +307,8 @@ En conclusión, ¿qué tan grande podría ser un mecha? Con tubos de pared delga
 
 - Al-Ketan, Rowshan y Abu Al-Rub (2018). Topology-mechanical property relationship of 3D printed strut, skeletal, and sheet based periodic metallic cellular materials. Additive Manufacturing 19:167.
 - Ataee et al. (2018). Acta Materialia 158:354.
+- Belyaev et al. (2025). Comparative study of the body proportions in Elephantidae and other large herbivorous mammals. Journal of Anatomy 246:63. [doi.org/10.1111/joa.14143](https://doi.org/10.1111/joa.14143)
+- Benson et al. (2014). PLoS Biology 12:e1001853. [doi.org/10.1371/journal.pbio.1001853](https://doi.org/10.1371/journal.pbio.1001853)
 - Biewener (1989). Scaling body support in mammals: limb posture and muscle mechanics. Science 245:45. [doi.org/10.1126/science.2740914](https://doi.org/10.1126/science.2740914)
 - Biewener (2005). Biomechanical consequences of scaling. Journal of Experimental Biology 208:1665. [doi.org/10.1242/jeb.01520](https://doi.org/10.1242/jeb.01520)
 - Código de construcción de Nueva York 2022, capítulo 18. [nyc.gov](https://www.nyc.gov/assets/buildings/codes-pdf/cons_codes_2022/2022BC_Chapter18_SoilsFoundationsWBwm.pdf)
@@ -280,20 +320,27 @@ En conclusión, ¿qué tan grande podría ser un mecha? Con tubos de pared delga
 - Kajita et al. (2003). Biped walking pattern generation by using preview control of zero-moment point. ICRA.
 - Keller et al. (1996). Clinical Biomechanics 11:253.
 - Kelly et al. (2021). Additive Manufacturing 41:101916.
+- Larramendi (2016). Shoulder height, body mass, and shape of proboscideans. Acta Palaeontologica Polonica 61:537. [doi.org/10.4202/app.00136.2014](https://doi.org/10.4202/app.00136.2014)
 - Li, Liao, Dai y Xie (2019). Materials 12:2183. [PMC6650998](https://pmc.ncbi.nlm.nih.gov/articles/PMC6650998)
 - Love, Lanke y Alles (2012). Estimating the impact of the US fluid power industry. ORNL/TM-2011/14. [info.ornl.gov](https://info.ornl.gov/sites/publications/files/pub28014.pdf)
 - Mahmud et al. (2021). Metals 11:1671. [inldigitallibrary.inl.gov](https://inldigitallibrary.inl.gov/sites/sti/sti/Sort_63131.pdf)
 - Marinos y Hoek (2000). GSI: a geologically friendly tool for rock mass strength estimation. [rocscience.com](https://www.rocscience.com/assets/resources/learning/hoek/GSI-A-Geologically-Friendly-Tool-for-Rock-Mass-Strength-Estimation-2000.pdf)
+- McGhee y Frank (1968). On the stability properties of quadruped creeping gaits. Mathematical Biosciences 3:331. [doi.org/10.1016/0025-5564(68)90090-4](https://doi.org/10.1016/0025-5564%2868%2990090-4)
 - Naghavi et al. (2022). Bioengineering 9:504. [PMC9598079](https://pmc.ncbi.nlm.nih.gov/articles/PMC9598079/)
 - Nilsson y Thorstensson (1989). Ground reaction forces at different speeds of human walking and running. Acta Physiologica Scandinavica 136:217. [PubMed 2782094](https://pubmed.ncbi.nlm.nih.gov/2782094/)
 - Oke et al. (2026). Allometric Scaling Laws for Bipedal Robots. [arXiv:2603.22560](https://arxiv.org/abs/2603.22560)
+- Panagiotopoulou et al. (2016). Royal Society Open Science 3:160203. [doi.org/10.1098/rsos.160203](https://doi.org/10.1098/rsos.160203)
 - Polley et al. (2022). Journal of the Mechanical Behavior of Biomedical Materials 125:104882.
 - Prussack et al. (2024). Applied Thermal Engineering. [OSTI 2396699](https://www.osti.gov/biblio/2396699)
 - Qin, Jung, Kang y Buehler (2017). The mechanics and design of a lightweight three-dimensional graphene assembly. Science Advances 3:e1601536. [PMC5218516](https://pmc.ncbi.nlm.nih.gov/articles/PMC5218516)
+- Ren et al. (2008). Journal of Experimental Biology 211:2735. [doi.org/10.1242/jeb.018820](https://doi.org/10.1242/jeb.018820)
+- Ren et al. (2010). Integration of biomechanical compliance, leverage, and power in elephant limbs. PNAS 107:7078. [doi.org/10.1073/pnas.0911396107](https://doi.org/10.1073/pnas.0911396107)
+- Ren y Hutchinson (2008). Journal of the Royal Society Interface 5:195. [doi.org/10.1098/rsif.2007.1095](https://doi.org/10.1098/rsif.2007.1095)
 - Saleh, Anwar, Al-Ahmari y Alfaify (2022). Compression Performance and Failure Analysis of 3D-Printed Carbon Fiber/PLA Composite TPMS Lattice Structures. Polymers 14:4595. [PMC9654767](https://pmc.ncbi.nlm.nih.gov/articles/PMC9654767/)
 - Schoen (1970). Infinite periodic minimal surfaces without self-intersections. NASA TN D-5541. [ntrs.nasa.gov](https://ntrs.nasa.gov/citations/19700020472)
 - Szederkényi, Kovács y Czigány (2024). ECCM21. [real.mtak.hu](https://real.mtak.hu/206352/1/1843_open_ECCM21_Proceeding_CFRP_TPMS_crush.pdf)
 - Tensar International. Bearing Capacity of Soil: Types and Calculations. [tensarinternational.com](https://www.tensarinternational.com/resources/articles/bearing-capacity-of-soil)
+- Usherwood y Self Davies (2017). Work minimization accounts for footfall phasing in slow quadrupedal gaits. eLife 6:e29495. [doi.org/10.7554/eLife.29495](https://doi.org/10.7554/eLife.29495)
 - Vulović et al. (2023). Strength Analysis of Eight-Wheel Bogie of Bucket Wheel Excavator. Metals 13:466. [mdpi.com](https://www.mdpi.com/2075-4701/13/3/466)
 - Wang et al. (2022). PNAS 119:e2119536119. [PMC9407660](https://pmc.ncbi.nlm.nih.gov/articles/PMC9407660)
 - Winter (2009). Biomechanics and Motor Control of Human Movement, 4.ª ed. Wiley.
