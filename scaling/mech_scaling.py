@@ -85,6 +85,11 @@ class Design:
     f_skin: float = 0.10             # blindaje, cableado, carenado [fracción de la masa total]
     m_fixed: float = 1000.0          # cabina, piloto, sensores, electrónica [kg]
     foot_scale: float = 1.0          # escala lineal de la huella respecto a la humana
+    # cuadrúpedo (por defecto, bípedo): número de patas y cuerpo horizontal que trabaja como viga
+    n_legs: int = 2
+    trunk_span: float = 0.0          # luz de la viga del cuerpo entre caderas y hombros [× H]; 0 = tronco vertical
+    trunk_radius: float = 0.08       # radio del tubo del cuerpo [× H] (canto 0.16 H)
+    trunk_torsion_arm: float = 0.13  # semiancho de vía: brazo de la torsión cuando falta una pata [× H]
 
 
 # --------------------------------------------------------------------------
@@ -185,8 +190,21 @@ def design(H: float, d: Design = Design(), verbose=False):
         m_struct_leg += 0.3 * segs["pantorrilla"]["mass"]
         # actuadores: masa ∝ trabajo de carrera F·s = M_j·rango
         m_act_leg = sum(d.act_kg_per_J * Mj[k] * d.ranges[k] for k in Mj)
-        m_legs = 2 * (m_struct_leg + m_act_leg)
+        m_legs = d.n_legs * (m_struct_leg + m_act_leg)
         m_upper = d.f_upper * m_legs
+        m_trunk = 0.0
+        if d.trunk_span > 0:
+            # cuerpo horizontal apoyado en caderas y hombros: flexión de viga biapoyada con carga
+            # repartida (W·D/8) más la torsión cuando una pata está en el aire (pie × semiancho de vía)
+            span = d.trunk_span * H
+            Mb = d.dlf * W * span / 8
+            Tq = d.dlf * d.grf_peak * W * d.trunk_torsion_arm * H
+            M_eq = math.sqrt(Mb ** 2 + 0.75 * Tq ** 2)
+            res = tube_section(0.0, M_eq, d.trunk_radius * H, 1.25 * span, mat, d, core=False)
+            if res is None:
+                return {"H": H, "feasible": False, "reason": "espiral de masa", "m": m}
+            m_trunk = res[0] * 1.25 * span * d.joint_factor
+            m_upper += m_trunk
         # energía
         P_peak = d.p_peak_norm * m * G * math.sqrt(G * H) / d.eff   # potencia hidráulica pico
         P_mean = d.p_mean_norm * m * G * math.sqrt(G * H)            # potencia mecánica media
@@ -220,7 +238,7 @@ def design(H: float, d: Design = Design(), verbose=False):
     fr_speed = math.sqrt(0.25 * G * 0.53 * H)
     return {
         "H": H, "feasible": True, "m": m, "m_over_H3": m / H ** 3,
-        "breakdown": {"estructura_piernas": 2 * m_struct_leg, "actuadores_piernas": 2 * m_act_leg,
+        "breakdown": {"estructura_piernas": d.n_legs * m_struct_leg, "actuadores_piernas": d.n_legs * m_act_leg,
                       "tronco_brazos": m_upper, "energia": m_power, "fijo": d.m_fixed,
                       "blindaje_cables": d.f_skin * m},
         "segments": segs, "bore_m": bore, "limb_d_m": limb_d, "actuator_fits": fits,

@@ -51,6 +51,23 @@ La verificación afirmación por afirmación, con enlaces a las fuentes, está e
 corregido, con estas conclusiones, figuras y tablas, está copiado en
 [`docs/documento.md`](docs/documento.md).
 
+## ¿Y si fuera cuadrúpedo?
+
+Más alto, no; más pesado y más largo, sí. Se simuló en MuJoCo un cuadrúpedo con
+cuatro patas idénticas a las del bípedo y se pasó por el mismo modelo de
+dimensionado. El detalle está en [`docs/cuadrupedo.md`](docs/cuadrupedo.md).
+
+- **Cada pie carga la mitad** (≈0.5 × peso frente a ≈1.0), pero hay el doble de
+  patas que construir y que balancear. La suma de par × recorrido de los
+  actuadores apenas baja.
+- **Altura equivalente máxima, escenario base:**
+  - a igual velocidad, el cuadrúpedo llega a 23 m y el bípedo a 45 m;
+  - yendo al 45 % de la velocidad del bípedo, el cuadrúpedo llega a 43 m.
+- **Para las mismas patas, el cuadrúpedo pesa más.** Con patas de 21 m pesa
+  ~290 t, mide 26 m hasta el lomo y unos 27 m de largo.
+- **Su ventaja está en el suelo y en la estabilidad.** Aplica la mitad de
+  presión por pie y no necesita mantener el equilibrio.
+
 ## Altura máxima por escenario (espiral de masa)
 
 | Concepto estructural de las piernas | Optimista | Base | Pesimista |
@@ -103,12 +120,16 @@ scaling/            Modelo de dimensionado del mecha en función de la altura
                       actuadores hidráulicos, energía, espiral de masa, escenarios
   soil.py             capacidad portante de Terzaghi/Vesić y hundimiento de equilibrio
   run_analysis.py     barridos y figuras
+  compare_quad.py     bípedo frente a cuadrúpedo en el modelo de dimensionado
 sim/                Simulación física en MuJoCo
   mech_model.py       bípedo paramétrico (antropometría de Winter) escalable a cualquier altura
   gait.py             marcha: control predictivo del ZMP (Kajita) + cinemática inversa
   walk.py             simulación, fuerzas de contacto, presión bajo el pie, suelo deformable
   experiments.py      E1 marcha a varias alturas, E2 actuadores insuficientes, E3 suelo
   make_videos.py      vídeos de los casos representativos
+  quad_model.py       cuadrúpedo con cuatro patas idénticas a las del bípedo
+  quad_walk.py        paso de gateo estable, reparto de carga entre patas, simulación
+  quad_experiments.py bípedo frente a cuadrúpedo medidos igual, y vídeos
 gazebo/             El mismo mecha exportado a Gazebo Harmonic (SDF) y verificación cruzada
 results/            JSON, figuras, vídeos y salidas de Gazebo
 docs/               Verificación de fuentes y notas de investigación
@@ -130,6 +151,9 @@ python scaling/run_analysis.py          # límites de altura y figuras
 python sim/experiments.py all           # E1, E2, E3 en MuJoCo
 python sim/plot_results.py
 MUJOCO_GL=osmesa python sim/make_videos.py   # sin GPU; con GPU usar MUJOCO_GL=egl
+python sim/quad_experiments.py          # bípedo frente a cuadrúpedo
+python scaling/compare_quad.py
+MUJOCO_GL=osmesa python sim/quad_experiments.py --solo-videos
 ```
 
 ### Gazebo
@@ -172,6 +196,10 @@ python3.12 gazebo/run_gazebo.py gazebo/out_H20 --no-server
 | `results/videos/e3_arcilla_blanda_H20.mp4` | 20 m con densidad humana (104 t) en arcilla blanda: se hunde y cae |
 | `results/videos/e3_arcilla_blanda_H50.mp4` | 50 m (1600 t) en arcilla blanda: se hunde ~10 m y cae |
 | `results/videos/e3_arena_densa_H50.mp4` | 50 m (1600 t) en arena densa: camina |
+| `results/videos/cuadrupedo_H1.75.mp4` | Cuadrúpedo de referencia, patas de 0.93 m |
+| `results/videos/cuadrupedo_H20.mp4` | Cuadrúpedo con patas de 10.6 m (≈14 t), gateo lento |
+| `results/videos/cuadrupedo_H40.mp4` | Cuadrúpedo con patas de 21 m (≈290 t), cerca del límite |
+| `results/videos/cuadrupedo_rapido_H20.mp4` | Cuadrúpedo con patas de 10.6 m (≈33 t), gateo rápido |
 
 Los vídeos se reproducen con el tiempo de una persona: un segundo de vídeo son
 √(H/1.75) segundos reales. Las referencias de escala son una persona de 1.75 m
