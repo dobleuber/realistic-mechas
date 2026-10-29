@@ -1,0 +1,369 @@
+{
+ "casos": {
+  "bipedo": {
+   "par": {
+    "hip": 0.04311560782269952,
+    "knee": 0.098222063786802,
+    "ankle": 0.07300043042722922,
+    "hip_roll": 0.05101441924525772,
+    "ankle_roll": 0.006611922767058215
+   },
+   "grf_pie": 1.0363001854535685,
+   "p_pico": 0.03446101418866255,
+   "p_media": 0.00872021029675366,
+   "v": 0.2763157894736842,
+   "patas": 2,
+   "nombre": "B\u00edpedo (marcha de E1)",
+   "suma_par_recorrido": 0.8442173726414097
+  },
+  "bipedo_lento": {
+   "par": {
+    "hip": 0.026325067733143342,
+    "knee": 0.07561018336532399,
+    "ankle": 0.05005264467475044,
+    "hip_roll": 0.05558945350732618,
+    "ankle_roll": 0.005209101885571069
+   },
+   "grf_pie": 1.0282570478154878,
+   "p_pico": 0.02200607383823329,
+   "p_media": 0.00425422696512348,
+   "v": 0.1193181818181818,
+   "patas": 2,
+   "nombre": "B\u00edpedo a la velocidad de los cuadr\u00fapedos",
+   "suma_par_recorrido": 0.6365245234778646
+  },
+  "generico": {
+   "par": {
+    "hip": 0.02594146494051187,
+    "knee": 0.05621029139581497,
+    "ankle": 0.024072350159485632,
+    "hip_roll": 0.01175506841865232,
+    "ankle_roll": 0.0009104815959607266
+   },
+   "grf_pie": 0.6091495126900041,
+   "p_pico": 0.028109302942598034,
+   "p_media": 0.004211653363293227,
+   "cop_max": 0.010766948905896728,
+   "rozamiento_max": 0.8438023509579973,
+   "v": 0.12400374893526406,
+   "z_var": 0.03122215703898585,
+   "patas": 4,
+   "nombre": "Cuadr\u00fapedo gen\u00e9rico (patas del b\u00edpedo)",
+   "z_rel": 0.9037074411327453,
+   "knee_stance": 0.816600502820201,
+   "simulacion_directa": {
+    "cae": false,
+    "avance_L": 1.778790210492749
+   },
+   "suma_par_recorrido": 0.8345926115600757
+  },
+  "elefante": {
+   "par": {
+    "hip": 0.040342915484647246,
+    "knee": 0.03890710080052207,
+    "ankle": 0.006091755703799446,
+    "hip_roll": 0.01576912807629527,
+    "ankle_roll": 0.0010077927255355721
+   },
+   "grf_pie": 0.608524622045682,
+   "p_pico": 0.022541165205362534,
+   "p_media": 0.004987067473249462,
+   "cop_max": 0.002817993780282016,
+   "rozamiento_max": 0.6043622841324825,
+   "v": 0.12400374893526406,
+   "z_var": 0.04395759359040957,
+   "patas": 4,
+   "nombre": "Mecha tipo elefante",
+   "z_rel": 0.9494660758184371,
+   "knee_stance": 0.30294281839408943,
+   "simulacion_directa": {
+    "cae": false,
+    "avance_L": 1.8199050848041347
+   },
+   "suma_par_recorrido": 0.7125531157564365
+  },
+  "rinoceronte": {
+   "par": {
+    "hip": 0.06832175679173272,
+    "knee": 0.038290661069375176,
+    "ankle": 0.018674592920516337,
+    "hip_roll": 0.01621342347244383,
+    "ankle_roll": 0.0011200679092757512
+   },
+   "grf_pie": 0.6288290758439,
+   "p_pico": 0.03241570166887713,
+   "p_media": 0.005576902840488908,
+   "cop_max": 0.009180234685344563,
+   "rozamiento_max": 0.999949942348843,
+   "v": 0.12400374893526406,
+   "z_var": 0.05997603028278429,
+   "patas": 4,
+   "nombre": "Mecha tipo rinoceronte",
+   "z_rel": 0.878674669078622,
+   "knee_stance": 0.7135410797571313,
+   "simulacion_directa": {
+    "cae": false,
+    "avance_L": 1.7525066905518965
+   },
+   "suma_par_recorrido": 0.9703954674412758
+  },
+  "hipopotamo": {
+   "par": {
+    "hip": 0.07236753951430211,
+    "knee": 0.04441218257221035,
+    "ankle": 0.006976160736714302,
+    "hip_roll": 0.020323221692616363,
+    "ankle_roll": 0.008366131907639341
+   },
+   "grf_pie": 0.6662835485888696,
+   "p_pico": 0.05390427593498334,
+   "p_media": 0.005137944553635796,
+   "cop_max": 0.4941807063935128,
+   "rozamiento_max": 0.5464404031260569,
+   "v": 0.12400374893526406,
+   "z_var": 0.058928055033239744,
+   "patas": 4,
+   "nombre": "Mecha tipo hipop\u00f3tamo",
+   "z_rel": 0.887115188326443,
+   "knee_stance": 0.6993020556244455,
+   "simulacion_directa": {
+    "cae": false,
+    "avance_L": 1.7675676465808108
+   },
+   "suma_par_recorrido": 1.0103933720910274
+  },
+  "elefante_codo_atras": {
+   "par": {
+    "hip": 0.04369785932309031,
+    "knee": 0.0557410203821604,
+    "ankle": 0.006196626950715432,
+    "hip_roll": 0.017707563886765754,
+    "ankle_roll": 0.0011309038002720229
+   },
+   "grf_pie": 0.6096575338713378,
+   "p_pico": 0.027192501566687108,
+   "p_media": 0.0050263944973397865,
+   "cop_max": 0.00457100363264574,
+   "rozamiento_max": 0.802940246684107,
+   "v": 0.12400374893526406,
+   "z_var": 0.04084086224662923,
+   "patas": 4,
+   "nombre": "Mecha tipo elefante, codo hacia atr\u00e1s",
+   "z_rel": 0.9527232951804837,
+   "knee_stance": 0.3347485990024144,
+   "simulacion_directa": {
+    "cae": false,
+    "avance_L": 1.9035876826955607
+   },
+   "suma_par_recorrido": 0.8915535802903463
+  },
+  "rinoceronte_codo_atras": {
+   "par": {
+    "hip": 0.07331626737048207,
+    "knee": 0.09651365423666686,
+    "ankle": 0.019585876007158932,
+    "hip_roll": 0.019433211382296586,
+    "ankle_roll": 0.0013119572220669673
+   },
+   "grf_pie": 0.6370643826599224,
+   "p_pico": 0.042329754162992825,
+   "p_media": 0.006348558740361089,
+   "cop_max": 0.011346904501084812,
+   "rozamiento_max": 1.4073421354658062,
+   "v": 0.12400374893526406,
+   "z_var": 0.05346018682312342,
+   "patas": 4,
+   "nombre": "Mecha tipo rinoceronte, codo hacia atr\u00e1s",
+   "z_rel": 0.8867751452757402,
+   "knee_stance": 0.7337543421361473,
+   "simulacion_directa": {
+    "cae": false,
+    "avance_L": 1.743534066167994
+   },
+   "suma_par_recorrido": 1.5333957636078512
+  },
+  "hipopotamo_codo_atras": {
+   "par": {
+    "hip": 0.08842936363511109,
+    "knee": 0.09607995869897022,
+    "ankle": 0.00947318281342726,
+    "hip_roll": 0.0270100585219313,
+    "ankle_roll": 0.012935785625015806
+   },
+   "grf_pie": 0.6657938424274003,
+   "p_pico": 0.0679239151315092,
+   "p_media": 0.005564950494138396,
+   "cop_max": 1.785807423052005,
+   "rozamiento_max": 0.4973918566976589,
+   "v": 0.12400374893526406,
+   "z_var": 0.05254043078522527,
+   "patas": 4,
+   "nombre": "Mecha tipo hipop\u00f3tamo, codo hacia atr\u00e1s",
+   "z_rel": 0.894421759869535,
+   "knee_stance": 0.71864871583529,
+   "simulacion_directa": {
+    "cae": false,
+    "avance_L": 1.763370290957052
+   },
+   "suma_par_recorrido": 1.6140985194983688
+  }
+ },
+ "marcha": {
+  "duty": 0.794,
+  "stride": 0.453,
+  "froude": 0.00169
+ },
+ "arquetipos": {
+  "generico": {
+   "nombre": "Cuadr\u00fapedo gen\u00e9rico (patas del b\u00edpedo)",
+   "arch": {},
+   "gait": {
+    "knee_min": 0.83
+   }
+  },
+  "elefante": {
+   "nombre": "Mecha tipo elefante",
+   "arch": {
+    "DX": 0.5035,
+    "WY": 0.07155,
+    "body_depth": 0.3127,
+    "body_z": 0.10335000000000004,
+    "foot_L": 0.11960819171212435,
+    "foot_W": 0.11960819171212435,
+    "ankle_x": 0.0,
+    "front_share": 0.6,
+    "knee_front": 1,
+    "knee_hind": 1
+   },
+   "gait": {
+    "knee_min": 0.42
+   }
+  },
+  "rinoceronte": {
+   "nombre": "Mecha tipo rinoceronte",
+   "arch": {
+    "DX": 0.8480000000000001,
+    "WY": 0.0795,
+    "body_depth": 0.53,
+    "body_z": 0.05300000000000005,
+    "foot_L": 0.1537,
+    "foot_W": 0.12190000000000001,
+    "ankle_x": 0.2,
+    "front_share": 0.62,
+    "knee_front": 1,
+    "knee_hind": 1
+   },
+   "gait": {
+    "knee_min": 0.8
+   }
+  },
+  "hipopotamo": {
+   "nombre": "Mecha tipo hipop\u00f3tamo",
+   "arch": {
+    "DX": 0.795,
+    "WY": 0.10335000000000001,
+    "body_depth": 0.42400000000000004,
+    "body_z": -0.026499999999999965,
+    "foot_L": 0.08457576344510373,
+    "foot_W": 0.08457576344510373,
+    "ankle_x": 0.1,
+    "front_share": 0.6,
+    "knee_front": 1,
+    "knee_hind": 1
+   },
+   "gait": {
+    "knee_min": 0.8,
+    "phases": [
+     [
+      "LH",
+      0.0
+     ],
+     [
+      "RF",
+      0.0
+     ],
+     [
+      "RH",
+      0.5
+     ],
+     [
+      "LF",
+      0.5
+     ]
+    ]
+   }
+  },
+  "elefante_codo_atras": {
+   "nombre": "Mecha tipo elefante, codo hacia atr\u00e1s",
+   "arch": {
+    "DX": 0.5035,
+    "WY": 0.07155,
+    "body_depth": 0.3127,
+    "body_z": 0.10335000000000004,
+    "foot_L": 0.11960819171212435,
+    "foot_W": 0.11960819171212435,
+    "ankle_x": 0.0,
+    "front_share": 0.6,
+    "knee_front": -1,
+    "knee_hind": 1
+   },
+   "gait": {
+    "knee_min": 0.42
+   }
+  },
+  "rinoceronte_codo_atras": {
+   "nombre": "Mecha tipo rinoceronte, codo hacia atr\u00e1s",
+   "arch": {
+    "DX": 0.8480000000000001,
+    "WY": 0.0795,
+    "body_depth": 0.53,
+    "body_z": 0.05300000000000005,
+    "foot_L": 0.1537,
+    "foot_W": 0.12190000000000001,
+    "ankle_x": 0.2,
+    "front_share": 0.62,
+    "knee_front": -1,
+    "knee_hind": 1
+   },
+   "gait": {
+    "knee_min": 0.8
+   }
+  },
+  "hipopotamo_codo_atras": {
+   "nombre": "Mecha tipo hipop\u00f3tamo, codo hacia atr\u00e1s",
+   "arch": {
+    "DX": 0.795,
+    "WY": 0.10335000000000001,
+    "body_depth": 0.42400000000000004,
+    "body_z": -0.026499999999999965,
+    "foot_L": 0.08457576344510373,
+    "foot_W": 0.08457576344510373,
+    "ankle_x": 0.1,
+    "front_share": 0.6,
+    "knee_front": -1,
+    "knee_hind": 1
+   },
+   "gait": {
+    "knee_min": 0.8,
+    "phases": [
+     [
+      "LH",
+      0.0
+     ],
+     [
+      "RF",
+      0.0
+     ],
+     [
+      "RH",
+      0.5
+     ],
+     [
+      "LF",
+      0.5
+     ]
+    ]
+   }
+  }
+ }
+}

@@ -200,6 +200,15 @@ def plan_quad(gp: QuadGait = QuadGait()) -> QuadPlan:
                     speed=S / cycle, duty=1 - gp.t_sw / cycle)
 
 
+def leg_ik(ik: LegIK, d: np.ndarray, kdir: int) -> np.ndarray:
+    """Cinemática inversa de una pata. kdir = -1: rodilla hacia atrás (imagen especular en el plano
+    sagital: se resuelve el objetivo reflejado y se cambia el signo de los ángulos de cabeceo)."""
+    if kdir > 0:
+        return ik.solve(d)
+    q = ik.solve(np.array([-d[0], d[1], d[2]]))
+    return np.array([q[0], -q[1], -q[2], -q[3], q[4]])
+
+
 def inset_triangle(A, B, C, m):
     """Triángulo con cada lado desplazado hacia dentro una distancia m (homotecia desde el incentro)."""
     a, b, c = np.linalg.norm(B - C), np.linalg.norm(C - A), np.linalg.norm(A - B)
@@ -247,7 +256,7 @@ _CACHE = {}
 def simulate_quad(H: float, M: float, torque_limit: dict | None = None, gp: QuadGait | None = None,
                   video: str | None = None, video_fps: int = 30, label: str = "", record_every: int = 5,
                   adm: float = 0.03, vel_ff: bool = True, adm_xy: float = 0.03,
-                  armature_share: float = 0.5):
+                  armature_share: float = 0.5, plan: "QuadPlan | None" = None, arch: dict | None = None):
     """adm: ganancia del control de reparto de carga (admitancia). Cada pata apoyada se acorta o se
     alarga en proporción a la diferencia entre la carga que lleva y la que le asigna el plan:
         d(dz)/dt = adm · sqrt(g H) · (F_medida - F_deseada) / W
@@ -256,15 +265,24 @@ def simulate_quad(H: float, M: float, torque_limit: dict | None = None, gp: Quad
 
     adm_xy: lo mismo en horizontal. La fuerza deseada de cada pie apunta a su cadera (la pata trabaja
     como un puntal, como en los elefantes) y la resultante horizontal se conserva; sin esto, las patas
-    se empujan entre sí en horizontal y aparecen pares de cadera que no hacen falta."""
-    gp = gp or QuadGait()
-    key = tuple(sorted(gp.__dict__.items()))
-    if key not in _CACHE:
-        _CACHE[key] = plan_quad(gp)
-    pl = _CACHE[key]
+    se empujan entre sí en horizontal y aparecen pares de cadera que no hacen falta.
+
+    plan / arch: plan ya calculado (por ejemplo, de quad_gait.plan_animal) y parámetros del modelo
+    (QuadParams) que lo acompañan; si no se dan, se usa el paso de gateo de plan_quad(gp)."""
+    if plan is None:
+        gp = gp or QuadGait()
+        key = tuple(sorted(gp.__dict__.items()))
+        if key not in _CACHE:
+            _CACHE[key] = plan_quad(gp)
+        pl = _CACHE[key]
+        arch = dict(DX=gp.DX, WY=gp.WY)
+    else:
+        pl = plan
+        arch = dict(arch or {})
     k = H / H0
     ts = math.sqrt(k)
-    qp = QuadParams(H=H, M=M, DX=gp.DX, WY=gp.WY, torque_limit=torque_limit or {}, armature_share=armature_share)
+    qp = QuadParams(H=H, M=M, torque_limit=torque_limit or {}, armature_share=armature_share, **arch)
+    kdir = [qp.knee_dir(lg) for lg in LEGS]
     model = mujoco.MjModel.from_xml_string(build_quad_mjcf(qp))
     data = mujoco.MjData(model)
     dt = model.opt.timestep
@@ -362,7 +380,7 @@ def simulate_quad(H: float, M: float, torque_limit: dict | None = None, gp: Quad
             dz = np.clip(dz, -dz_max, dz_max)
             qref = qref.copy()
             for j in range(4):
-                qref[5 * j:5 * j + 5] = ik.solve(dv[j] + dz[j])
+                qref[5 * j:5 * j + 5] = leg_ik(ik, dv[j] + dz[j], kdir[j])
         # prealimentación de velocidad: el servo de posición de MuJoCo amortigua la velocidad real
         # (-kv·qdot), lo que retrasa la pata en vuelo kv/kp·qdot; se compensa con kv/kp·qdot_ref.
         qd_ref = (pl.qd[k0] * (1 - a_) + pl.qd[k0 + 1] * a_) / ts

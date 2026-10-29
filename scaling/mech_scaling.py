@@ -85,6 +85,8 @@ class Design:
     f_skin: float = 0.10             # blindaje, cableado, carenado [fracción de la masa total]
     m_fixed: float = 1000.0          # cabina, piloto, sensores, electrónica [kg]
     foot_scale: float = 1.0          # escala lineal de la huella respecto a la humana
+    foot_L: float | None = None      # largo y ancho del pie [× H]; None = los del pie humano × foot_scale
+    foot_W: float | None = None
     # cuadrúpedo (por defecto, bípedo): número de patas y cuerpo horizontal que trabaja como viga
     n_legs: int = 2
     trunk_span: float = 0.0          # luz de la viga del cuerpo entre caderas y hombros [× H]; 0 = tronco vertical
@@ -227,8 +229,10 @@ def design(H: float, d: Design = Design(), verbose=False):
     fits = bore <= d.bore_max * limb_d
 
     # pie y suelo
-    B = 0.055 * H * d.foot_scale
-    L = 0.152 * H * d.foot_scale
+    B = (d.foot_W if d.foot_W is not None else 0.055 * d.foot_scale) * H
+    L = (d.foot_L if d.foot_L is not None else 0.152 * d.foot_scale) * H
+    if B > L:
+        B, L = L, B
     q = d.grf_peak * W / (B * L)
     ground = {}
     for k, s in SOILS.items():

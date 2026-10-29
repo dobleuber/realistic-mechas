@@ -9,6 +9,11 @@ solo si camina más despacio. A igual velocidad sale peor. Su ventaja real está
 otra parte: aplica la mitad de presión por pie, no necesita mantener el
 equilibrio y puede cargar más masa cerca del límite.
 
+> **Ampliación:** en [`animales.md`](animales.md) se repite la comparación con un método más limpio
+> (dinámica inversa con reparto de fuerzas de par mínimo, igual para todos los diseños) y se prueban
+> proporciones de elefante, rinoceronte e hipopótamo. La conclusión se mantiene: con las mismas
+> patas, cuatro patas no dan más altura que dos. La postura del elefante es lo que más ayuda.
+
 ## Cómo se ha comparado
 
 Para que la comparación sea justa, el cuadrúpedo es literalmente «cuatro

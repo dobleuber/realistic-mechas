@@ -68,6 +68,25 @@ dimensionado. El detalle está en [`docs/cuadrupedo.md`](docs/cuadrupedo.md).
 - **Su ventaja está en el suelo y en la estabilidad.** Aplica la mitad de
   presión por pie y no necesita mantener el equilibrio.
 
+### ¿Y con patas de elefante, rinoceronte o hipopótamo?
+
+Se probaron mechas con las proporciones, la postura, los pies y la marcha de los
+tres animales terrestres más pesados, con datos publicados de cada uno. El
+detalle está en [`docs/animales.md`](docs/animales.md). Todos se midieron igual,
+por dinámica inversa con control de fuerza ideal.
+
+- **El tipo elefante es el mejor cuadrúpedo.** En el escenario base llega a
+  patas de 34 m, lomo a 53 m y 41 m de largo. Lo que más ayuda son las **patas
+  más rectas** (−16 % de actuadores). La vía estrecha y los pies grandes aportan
+  poco.
+- **El rinoceronte y el hipopótamo salen peor** que el cuadrúpedo genérico, por
+  sus patas flexionadas y sus cuerpos largos. El hipopótamo, además, concentra
+  ~200 kPa bajo sus pies pequeños.
+- **El codo hacia atrás de los animales no le conviene al mecha** (+22 % de par
+  o más).
+- **El orden coincide con el de los animales reales:** elefante > rinoceronte ≈
+  hipopótamo.
+
 ## Altura máxima por escenario (espiral de masa)
 
 | Concepto estructural de las piernas | Optimista | Base | Pesimista |
@@ -121,6 +140,7 @@ scaling/            Modelo de dimensionado del mecha en función de la altura
   soil.py             capacidad portante de Terzaghi/Vesić y hundimiento de equilibrio
   run_analysis.py     barridos y figuras
   compare_quad.py     bípedo frente a cuadrúpedo en el modelo de dimensionado
+  compare_animals.py  tamaño máximo de los mechas tipo animal
 sim/                Simulación física en MuJoCo
   mech_model.py       bípedo paramétrico (antropometría de Winter) escalable a cualquier altura
   gait.py             marcha: control predictivo del ZMP (Kajita) + cinemática inversa
@@ -130,6 +150,9 @@ sim/                Simulación física en MuJoCo
   quad_model.py       cuadrúpedo con cuatro patas idénticas a las del bípedo
   quad_walk.py        paso de gateo estable, reparto de carga entre patas, simulación
   quad_experiments.py bípedo frente a cuadrúpedo medidos igual, y vídeos
+  quad_gait.py        marcha de cuadrúpedo con fases propias por pata (secuencia lateral, trote)
+  inverse_dynamics.py par necesario por dinámica inversa con reparto de fuerzas de par mínimo
+  animal_experiments.py mechas tipo elefante, rinoceronte e hipopótamo, y vídeos
 gazebo/             El mismo mecha exportado a Gazebo Harmonic (SDF) y verificación cruzada
 results/            JSON, figuras, vídeos y salidas de Gazebo
 docs/               Verificación de fuentes y notas de investigación
@@ -154,6 +177,9 @@ MUJOCO_GL=osmesa python sim/make_videos.py   # sin GPU; con GPU usar MUJOCO_GL=e
 python sim/quad_experiments.py          # bípedo frente a cuadrúpedo
 python scaling/compare_quad.py
 MUJOCO_GL=osmesa python sim/quad_experiments.py --solo-videos
+python sim/animal_experiments.py        # elefante, rinoceronte, hipopótamo
+python scaling/compare_animals.py
+MUJOCO_GL=osmesa python sim/animal_experiments.py --solo-videos
 ```
 
 ### Gazebo
@@ -200,6 +226,9 @@ python3.12 gazebo/run_gazebo.py gazebo/out_H20 --no-server
 | `results/videos/cuadrupedo_H20.mp4` | Cuadrúpedo con patas de 10.6 m (≈14 t), gateo lento |
 | `results/videos/cuadrupedo_H40.mp4` | Cuadrúpedo con patas de 21 m (≈290 t), cerca del límite |
 | `results/videos/cuadrupedo_rapido_H20.mp4` | Cuadrúpedo con patas de 10.6 m (≈33 t), gateo rápido |
+| `results/videos/animal_elefante.mp4` | Mecha tipo elefante: patas de 27 m, lomo a 42 m, 445 t |
+| `results/videos/animal_rinoceronte.mp4` | Mecha tipo rinoceronte: patas de 20 m, lomo a 37 m, 511 t |
+| `results/videos/animal_hipopotamo.mp4` | Mecha tipo hipopótamo, al trote: patas de 17 m, 224 t |
 
 Los vídeos se reproducen con el tiempo de una persona: un segundo de vídeo son
 √(H/1.75) segundos reales. Las referencias de escala son una persona de 1.75 m

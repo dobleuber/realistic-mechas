@@ -43,6 +43,13 @@ class QuadParams:
     refs: bool = True
     armature_share: float = 0.5     # inercia reflejada de cada actuador [× 0.001 M H²]; la mitad que en el
                                     # bípedo porque cada pata lleva la mitad de carga y sus actuadores son menores
+    front_share: float = 0.5        # fracción del peso sobre las patas delanteras en reposo
+    knee_front: int = 1             # +1: la rodilla delantera apunta hacia delante (como el bípedo);
+    knee_hind: int = 1              # -1: apunta hacia atrás (como el codo de un cuadrúpedo)
+    foot_L: float | None = None     # largo del pie [× H] (None = el del bípedo × foot_scale)
+    foot_W: float | None = None     # ancho del pie [× H]
+    ankle_x: float = 0.25           # centro de la suela respecto al tobillo [× largo del pie] (0 = pie redondo centrado)
+    body_z: float | None = None     # altura del centro del cuerpo sobre las caderas [× H]; None = canto / 2
 
     @property
     def thigh(self):
@@ -62,11 +69,20 @@ class QuadParams:
 
     @property
     def foot_len(self):
-        return FOOT_LENGTH * self.H * self.foot_scale
+        return (self.foot_L if self.foot_L is not None else FOOT_LENGTH * self.foot_scale) * self.H
 
     @property
     def foot_wid(self):
-        return FOOT_WIDTH * self.H * self.foot_scale
+        return (self.foot_W if self.foot_W is not None else FOOT_WIDTH * self.foot_scale) * self.H
+
+    def knee_dir(self, leg: str) -> int:
+        return self.knee_front if leg[1] == "F" else self.knee_hind
+
+    def body_com_x(self) -> float:
+        """Posición x del CdM del cuerpo respecto al punto medio caderas-hombros para obtener front_share
+        (las patas apoyan su propio peso sobre su pie)."""
+        legs = 1.0 - M_BODY
+        return self.DX * self.H * ((self.front_share - legs / 2) / M_BODY - 0.5)
 
     def hip_pos(self, leg: str):
         x = 0.5 * self.DX * self.H * (1 if leg[1] == "F" else -1)
@@ -94,6 +110,7 @@ def build_quad_mjcf(p: QuadParams, dt: float | None = None) -> str:
     Lb = p.DX * H * 1.25
     Bb = 2 * p.WY * H * 1.1
     Db = p.body_depth * H
+    bz = (p.body_z if p.body_z is not None else 0.5 * p.body_depth) * H
     I_b = _box_inertia(m_body, Lb, Bb, Db)
 
     kp = 60.0 * W * H * p.kp_scale
@@ -102,18 +119,21 @@ def build_quad_mjcf(p: QuadParams, dt: float | None = None) -> str:
     tl.update(p.torque_limit)
     r_th = 0.05 * H * 0.6
     r_sh = 0.035 * H * 0.6
-    foot_x = fl * (0.5 - 0.25)
+    foot_x = fl * p.ankle_x
 
     def leg(name: str) -> str:
         x, y = p.hip_pos(name)
+        kd = p.knee_dir(name)
+        hip_rng = "-2.0 1.0" if kd > 0 else "-1.0 2.0"
+        knee_rng = "0 2.4" if kd > 0 else "-2.4 0"
         return f"""
       <body name="thigh_{name}" pos="{x:.6g} {y:.6g} 0">
         <joint name="hip_roll_{name}" axis="1 0 0" range="-0.6 0.6"/>
-        <joint name="hip_pitch_{name}" axis="0 1 0" range="-2.0 1.0"/>
+        <joint name="hip_pitch_{name}" axis="0 1 0" range="{hip_rng}"/>
         <inertial pos="0 0 {-COM_THIGH * p.thigh:.6g}" mass="{m_th:.6g}" diaginertia="{I_th:.6g} {I_th:.6g} {0.2 * I_th:.6g}"/>
         <geom name="thigh_{name}" type="capsule" fromto="0 0 0 0 0 {-p.thigh:.6g}" size="{r_th:.6g}" material="armor" contype="0" conaffinity="1" mass="0"/>
         <body name="shank_{name}" pos="0 0 {-p.thigh:.6g}">
-          <joint name="knee_{name}" axis="0 1 0" range="0 2.4"/>
+          <joint name="knee_{name}" axis="0 1 0" range="{knee_rng}"/>
           <inertial pos="0 0 {-COM_SHANK * p.shank:.6g}" mass="{m_sh:.6g}" diaginertia="{I_sh:.6g} {I_sh:.6g} {0.2 * I_sh:.6g}"/>
           <geom name="shank_{name}" type="capsule" fromto="0 0 0 0 0 {-p.shank:.6g}" size="{r_sh:.6g}" material="armor2" contype="0" conaffinity="1" mass="0"/>
           <body name="foot_{name}" pos="0 0 {-p.shank:.6g}">
@@ -178,10 +198,10 @@ def build_quad_mjcf(p: QuadParams, dt: float | None = None) -> str:
     {refs_xml}
     <body name="body" pos="0 0 {HIP_HEIGHT * H:.6g}">
       <freejoint name="root"/>
-      <inertial pos="0 0 {0.5 * Db:.6g}" mass="{m_body:.6g}" diaginertia="{I_b[0]:.6g} {I_b[1]:.6g} {I_b[2]:.6g}"/>
-      <geom name="body" type="box" pos="0 0 {0.5 * Db:.6g}" size="{Lb / 2:.6g} {Bb / 2:.6g} {Db / 2:.6g}" material="armor" contype="0" conaffinity="1" mass="0"/>
-      <geom name="cabin" type="box" pos="{head_x - 0.04 * H:.6g} 0 {Db + 0.04 * H:.6g}" size="{0.07 * H:.6g} {0.06 * H:.6g} {0.04 * H:.6g}" material="accent" contype="0" conaffinity="1" mass="0"/>
-      <site name="imu" pos="0 0 {0.5 * Db:.6g}"/>
+      <inertial pos="{p.body_com_x():.6g} 0 {bz:.6g}" mass="{m_body:.6g}" diaginertia="{I_b[0]:.6g} {I_b[1]:.6g} {I_b[2]:.6g}"/>
+      <geom name="body" type="box" pos="0 0 {bz:.6g}" size="{Lb / 2:.6g} {Bb / 2:.6g} {Db / 2:.6g}" material="armor" contype="0" conaffinity="1" mass="0"/>
+      <geom name="cabin" type="box" pos="{head_x - 0.04 * H:.6g} 0 {bz + 0.5 * Db + 0.04 * H:.6g}" size="{0.07 * H:.6g} {0.06 * H:.6g} {0.04 * H:.6g}" material="accent" contype="0" conaffinity="1" mass="0"/>
+      <site name="imu" pos="0 0 {bz:.6g}"/>
       {"".join(leg(lg) for lg in LEGS)}
     </body>
   </worldbody>
